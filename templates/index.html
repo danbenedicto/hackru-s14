@@ -2,29 +2,26 @@
 <html>
 <body>
 
-<div id="container" style="width:500px">
-
-<div id="header" style="background-color:#BEE8C2;">
-<h1 style="margin-bottom:0;">Welcome to beeptext</div>
-
-<div id="menu" style="background-color:#D4CCE3;height:200px;width:100px;float:left;">
-<b>Past beeps</b><br>
-HERE<br>
-HERE<br>
-HERE</div>
-
-<div id="content" style="background-color:#EEEEEE;height:200px;width:400px;float:left;">
-
+<h1><center><FONT FACE="arial">welcome to beeptext</FONT></center></h1>
+<br><br>
+<div style="width:100%;"> 
+<div style="float:left; width:50%;">
+<center><FONT FACE="arial">text to beep</FONT></center>
+<br>
 <form action='/submit' method='post'>
-  <label for='message'>Type your message</label>
-  <input message='message' type='text'></input>
-  <br>
-  <label for='message'>Name your message</label>
-  <input name='name' type='text'></input>
-
-  <input type='submit'></input>
-</form></div>
-
+  <label for='message'><center><FONT FACE="arial">type your message</FONT></label>
+  <input name='message' type='text'></input>
+ </form>
+</div>
+<div style="float:right; width:50%; ">
+<center><FONT FACE="arial">beep to text</FONT></center>
+<br>
+<form action='/submit' method='post'>
+  <label for='decode'><center><FONT FACE="arial">choose file</FONT></label>
+  <input type = "file">
+ </form>
+</div>
+ 
 </div>
 
 </body>
