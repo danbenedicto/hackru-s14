@@ -1,27 +1,56 @@
 <!DOCTYPE html>
 <html>
+<head>
+	<script>
+	var error_audio = new Audio("audio/"+settings.refresh.error_audio);
+	error_audio.load();
+
+	//this gets called when there is a connection error.
+	function onConnectionError() {
+	   error_audio.src = "audio/"+settings.refresh.error_audio;
+	   error_audio.play();
+	}
+ </script>
+	</head>
 <body>
 
 <h1><center><FONT FACE="arial">welcome to beeptext</FONT></center></h1>
 <br><br>
-<div style="width:100%;"> 
-<div style="float:left; width:50%;">
-<center><FONT FACE="arial">text to beep</FONT></center>
-<br>
-<form action='/submit' method='post'>
-  <label for='message'><center><FONT FACE="arial">type your message</FONT></label>
-  <input name='message' type='text'></input>
- </form>
+<div style="width:100%; text-align:center"> 
+	<div style="float:left; width:50%;">
+		<center><FONT FACE="arial">text to beep</FONT></center><br>
+		<form action='/' method='post'>
+			<label for='message'><center><FONT FACE="arial">type your message</FONT></label>
+			<input name='message' type='text'></input>
+		</form>
+		<br>
+	</div>
+
+	<div style="display:inline-block">
+		<center><FONT FACE="arial">beep to text</FONT></center><br>
+		<form action='/submit' method='post'>
+			<label for='decode'><center><FONT FACE="arial">choose file</FONT></label>
+			<input type = "file">
+		</form>
+	</div>
 </div>
-<div style="float:right; width:50%; ">
-<center><FONT FACE="arial">beep to text</FONT></center>
 <br>
-<form action='/submit' method='post'>
-  <label for='decode'><center><FONT FACE="arial">choose file</FONT></label>
-  <input type = "file">
- </form>
+<br>
+{% if beep %}
+<div>
+<div style="width:100%;text-align:center">
+		 <br>Your new beep:<br>
+		 Message: {{ beep['message']}}<br>
+		 <audio type="audio/wav" controls>
+		 	<source src="{{ url_for('static', filename=beep['name']+'.wav')}}">
+		</audio>
 </div>
- 
+</div>
+<br>
+{% endif %}
+
+<div style="text-align:center">
+	<a href="{{ url_for('beeps') }}">View past beeps</a>
 </div>
 
 </body>

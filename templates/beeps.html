@@ -1,0 +1,29 @@
+<html>
+<head>
+	<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+	</head>
+<body style="width:600px; margin:auto">
+	<h1>Beeps</h1>
+	{% for beep in beeps %}
+	<div class="well">
+	<div class=row>
+		<div class="col-md-5">
+			 {{ beep['message']}}
+		</div>
+		<div class="col-md-6">
+			 <audio type="audio/wav" controls preload="auto">
+			 	<source src="{{ url_for('static', filename=beep['name']+'.wav')}}">
+			</audio>
+		</div>
+	</div>
+</div>
+	{% endfor %}
+</body>
+</html>

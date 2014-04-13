@@ -1,7 +1,6 @@
 from flask import Flask, render_template, redirect, url_for
 from flask import request
 from melopy import Melopy
-import dataset
 from melopy.scales import *
 import dataset
 
@@ -11,30 +10,34 @@ db = dataset.connect('sqlite:///file.db')
 
 table = db['beeps']
 
-@app.route('/', methods=['GET'])
+@app.route('/', methods=['GET', 'POST'])
 def index():
-	return render_template('index.html')
+	if request.method == 'GET':
+		return render_template('index.html')
+	else:
+		name = str(len(table))
+		message = request.form['message']
+		beep = dict(name=name, message=message)
 
-@app.route('/submit', methods=['POST'])
-def submit():
-	name = len(table)
-	message = request.form['message']
-	beep = dict(name=name, message=message)
+		scale = filter(lambda s: s[0] != 'F' and s[0] != 'A', major_scale('C2') + major_scale('C3') + major_scale('C4') + major_scale('C5') + major_scale('C6') + major_scale('C7'))
+		m = Melopy('static/' + name, tempo=160)
+		for c in message.lower():
+			ascii = ord(c)
+			if (c >= 'A'):
+				ascii -= 97
+			else:
+				ascii -= 11
+			m.add_eighth_note(scale[ascii])
+		m.render()
+		
+		table.insert(beep)
+		
+		return render_template('index.html', beep=beep)
 
-	scale = minor_pentatonic_scale('C2') + minor_pentatonic_scale('C3') + minor_pentatonic_scale('C4') + minor_pentatonic_scale('C5') + minor_pentatonic_scale('C6') + minor_pentatonic_scale('C7')
-	m = Melopy('static/' + str(name))
-	for c in message.lower():
-		m.add_eighth_note(scale[ord(c) - 97])
-	m.render()
-	
-	table.insert(beep)
-	
-	return redirect(url_for('beeps', name=name))
-
-@app.route('/beeps/<name>', methods=['GET'])
-def beeps(name):
-    # beeps = table.find()
-    return render_template('playback.html', name=name)
+@app.route('/beeps/', methods=['GET'])
+def beeps():
+    beeps = table.find()
+    return render_template('beeps.html', beeps=beeps)
 	
 
 app.run(debug=True)
