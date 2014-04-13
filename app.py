@@ -1,8 +1,9 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 from flask import request
 from melopy import Melopy
 import dataset
 from melopy.scales import *
+import dataset
 
 app = Flask(__name__)
 
@@ -28,7 +29,12 @@ def submit():
 	
 	table.insert(beep)
 	
-	return render_template('playback.html', name=name)
+	return redirect(url_for('beeps', name=name))
+
+@app.route('/beeps/<name>', methods=['GET'])
+def beeps(name):
+    # beeps = table.find()
+    return render_template('playback.html', name=name)
 	
 
 app.run(debug=True)
