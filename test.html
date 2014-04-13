@@ -6,14 +6,14 @@ function doIt() {
 
     var audio = new window.webkitAudioContext(),
         position = 0,
-        scale = {
+        /*scale = {
             g: 392,
             f: 349.23,
             e: 329.63,
             a: 97,
             b: 493.88,
             d: 587.33
-        },
+        },*/
         song = "hello world";
 
     setInterval(play, 1000 / 4);
@@ -46,7 +46,7 @@ function doIt() {
             freq = note.charCodeAt(0) * 2;
         position += 1;
         if(position >= song.length) {
-            position = 0;
+            clearInterval();
         }
         if(freq) {
             createOscillator(freq);
@@ -57,7 +57,7 @@ function doIt() {
 </head>
 <body>
 
-<h1 onclick="doIt()">Click on this text!</h1>
+<h1 onclick="doIt()">click on the text fag lmao</h1>
 
 </body>
 </html>
