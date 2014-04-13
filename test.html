@@ -6,17 +6,57 @@ function doIt() {
 
     var audio = new window.webkitAudioContext(),
         position = 0,
-        /*scale = {
-            g: 392,
-            f: 349.23,
-            e: 329.63,
-            a: 97,
-            b: 493.88,
-            d: 587.33
-        },*/
-        song = "hello world";
+        scale = new Array(
+            16.35,
+            18.35,
+            20.60,
+            24.50,
+            27.50,
+            32.70,
+            36.71,
+            41.20,
+            49.00,
+            55.00,
+            65.41,
+            73.42,
+            82.41,
+            98.00,
+            110.00,
+            130.81,
+            146.83,
+            164.81,
+            196.00,
+            220.00,
+            261.63,
+            293.66,
+            329.63,
+            392.00,
+            440.00,
+            523.25,
+            587.33,
+            659.25,
+            783.99,
+            880.00,
+            1046.50,
+            1174.66,
+            1318.51,
+            1567.98,
+            1760.00,
+            2093.00,
+            2349.32,
+            2637.02,
+            3135.96,
+            3520.00,
+            4186.01,
+            4698.63,
+            5274.04,
+            6271.93,
+            7040.00
+        ),
+        // song = "O-OO-OO-OO-OO-O-T-TT-TT-TT-TT-T-";
+        song = "hello my name is daniel and i love sarah very much!!"
 
-    setInterval(play, 1000 / 4);
+    setInterval(play, 1000 / 7);
 
     function createOscillator(freq) {
         var attack = 10,
@@ -43,10 +83,10 @@ function doIt() {
 
     function play() {
         var note = song.charAt(position),
-            freq = note.charCodeAt(0) * 2;
+            freq = scale[(note.charCodeAt(0)-80)];
         position += 1;
         if(position >= song.length) {
-            clearInterval();
+            position = 0;
         }
         if(freq) {
             createOscillator(freq);
@@ -57,7 +97,11 @@ function doIt() {
 </head>
 <body>
 
-<h1 onclick="doIt()">click on the text fag lmao</h1>
+<h1 onclick="doIt()">Click on this text!</h1>
+
+<audio controls>
+    <source src="mysong.wav" type="audio/wav">
+</audio>
 
 </body>
 </html>
