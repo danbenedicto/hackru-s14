@@ -16,12 +16,12 @@ def index():
 
 @app.route('/submit', methods=['POST'])
 def submit():
-	name = request.form['name']
+	name = len(table)
 	message = request.form['message']
 	beep = dict(name=name, message=message)
 
 	scale = minor_pentatonic_scale('C2') + minor_pentatonic_scale('C3') + minor_pentatonic_scale('C4') + minor_pentatonic_scale('C5') + minor_pentatonic_scale('C6') + minor_pentatonic_scale('C7')
-	m = Melopy('static/' + name)
+	m = Melopy('static/' + str(name))
 	for c in message.lower():
 		m.add_eighth_note(scale[ord(c) - 97])
 	m.render()
