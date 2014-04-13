@@ -1,5 +1,31 @@
+<!DOCTYPE html>
 <html>
 <body>
-<h1>Welcome to beeptext!</h1>
+
+<div id="container" style="width:500px">
+
+<div id="header" style="background-color:#BEE8C2;">
+<h1 style="margin-bottom:0;">Welcome to beeptext</div>
+
+<div id="menu" style="background-color:#D4CCE3;height:200px;width:100px;float:left;">
+<b>Past beeps</b><br>
+HERE<br>
+HERE<br>
+HERE</div>
+
+<div id="content" style="background-color:#EEEEEE;height:200px;width:400px;float:left;">
+
+<form action='/submit' method='post'>
+  <label for='message'>Type your message</label>
+  <input message='message' type='text'></input>
+  <br>
+  <label for='message'>Name your message</label>
+  <input name='name' type='text'></input>
+
+  <input type='submit'></input>
+</form></div>
+
+</div>
+
 </body>
 </html>
